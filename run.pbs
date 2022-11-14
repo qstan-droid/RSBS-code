@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -P bacon
+#PBS -N 1_3_1_gamma_same_err_no_diff_K8_N2_opt_no_spread_2
+#PBS -l select=1:ncpus=1:mem=2gb
+#PBS -l walltime=10:00:00
+#PBS -J 1-10
+#PBS -o log_1_3_1_gamma_same_err_no_diff_K8_N2_opt_no_spread_2/log_output_^array_index^
+#PBS -e log_1_3_1_gamma_same_err_no_diff_K8_N2_opt_no_spread_2/log_error_^array_index^
+
+cd "$PBS_O_WORKDIR"
+
+mkdir "data_$PBS_JOBNAME"
+
+module load julia/1.6.0
+julia main.jl $PBS_ARRAY_INDEX $PBS_JOBNAME
